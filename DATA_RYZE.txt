@@ -1,4 +1,10 @@
 COMMON_FOR_VARIOUS_PROJECTS
+
+
+    before uploading on git use - 
+        pip freeze > requirements.txt
+
+
     install git system
         winget install --id Git.Git -e --source winget
         git --version
@@ -22,6 +28,9 @@ COMMON_FOR_VARIOUS_PROJECTS
         
         to finally set:
             git init
+            change global git config using comand and the path of project location:
+                git config --global --add safe.directory "E:/projects_praactice/projects_100_Angela/ELEVANCE_SKILLS_PROJECT_wORK/01_Book_My_Seat/djnago-bookmyshow-clone-main"
+
                 git remote add origin https://github.com/anmolkamboj99915/AI_UI_GENERATOR.git
                 git remote add origin https://github.com/anmolkamboj99915/Book_my_seat_cloned
             git add
@@ -121,6 +130,8 @@ installation modules -
     pip install django dj-database-url psycopg2-binary pillow
     pip install stripe
     pip install python-dotenv
+    pip install gunicorn
+
 
 
 
