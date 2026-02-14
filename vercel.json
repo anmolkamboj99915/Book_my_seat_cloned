@@ -8,6 +8,10 @@
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "bookmyseat/wsgi.py"
+    },
+    {
       "src": "/(.*)",
       "dest": "bookmyseat/wsgi.py"
     }
