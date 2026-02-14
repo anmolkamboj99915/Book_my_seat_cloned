@@ -154,4 +154,6 @@ to create admin - python manage.py createsuperuser
 username admin - Anmoljaiya
 username admin 2 - Anmolkamboj
 password - Anmol@2556   
+Username: admin
+Password: admin123
 
