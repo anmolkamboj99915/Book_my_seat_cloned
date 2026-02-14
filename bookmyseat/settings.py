@@ -4,13 +4,12 @@ import dj_database_url
 from dotenv import load_dotenv
 
 
+# ==================================================
+# BASE CONFIG
+# ==================================================
 
-# Load environment variables
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 load_dotenv(BASE_DIR / ".env")
-
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # ==================================================
@@ -25,6 +24,10 @@ ALLOWED_HOSTS = os.environ.get(
     "ALLOWED_HOSTS",
     "127.0.0.1,localhost,.vercel.app"
 ).split(",")
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.vercel.app",
+]
 
 
 # ==================================================
@@ -49,7 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Production static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -91,23 +94,15 @@ TEMPLATES = [
 # DATABASE
 # ==================================================
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True,
-    )
-}
-
-# Use PostgreSQL in production if DATABASE_URL exists
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
-if not DEBUG and DATABASE_URL:
-    DATABASES['default'] = dj_database_url.parse(
+DATABASES = {
+    "default": dj_database_url.parse(
         DATABASE_URL,
         conn_max_age=600,
-        ssl_require=True
+        ssl_require=not DEBUG,
     )
+}
 
 
 # ==================================================
@@ -138,7 +133,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
@@ -175,3 +169,4 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
