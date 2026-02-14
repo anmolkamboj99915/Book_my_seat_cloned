@@ -3,7 +3,7 @@ import os
 import dj_database_url
 from dotenv import load_dotenv
 
-# Load environment variables from .env
+# Load environment variables
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,10 +17,11 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key")
 
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.environ.get(
+    "ALLOWED_HOSTS",
+    "127.0.0.1,localhost,.vercel.app"
+).split(",")
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
 
 # ==================================================
 # APPLICATIONS
@@ -37,8 +38,14 @@ INSTALLED_APPS = [
     'movies',
 ]
 
+
+# ==================================================
+# MIDDLEWARE
+# ==================================================
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Production static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -46,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'bookmyseat.urls'
 WSGI_APPLICATION = 'bookmyseat.wsgi.application'
@@ -86,10 +94,12 @@ DATABASES = {
     }
 }
 
-# Use PostgreSQL in production
-if not DEBUG:
-    DATABASES['default'] = dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
+# Use PostgreSQL in production if DATABASE_URL exists
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if not DEBUG and DATABASE_URL:
+    DATABASES['default'] = dj_database_url.parse(
+        DATABASE_URL,
         conn_max_age=600,
         ssl_require=True
     )
@@ -123,6 +133,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # ==================================================
