@@ -133,10 +133,21 @@ installation modules -
     pip install gunicorn
     pip install dj-database-url psycopg2-binary
     pip install psycopg2-binary dj-database-url whitenoise gunicorn
+    npm install -g vercel
+    vercel login
+
 
     pip freeze > requirements.txt
 
 
+
+VERCEL SETUP:
+    npm install -g vercel
+    vercel login
+    vercel link
+    vercel env pull .env.production --environment=production
+    $env:DATABASE_URL = (Get-Content .env.production | Select-String DATABASE_URL).ToString().Split("=")[1]
+    python manage.py migrate
 
 
 
