@@ -1,0 +1,48 @@
+{% extends "users/basic.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 col-lg-6 mx-auto">
+
+      <div class="card shadow text-center p-5">
+
+        <!-- Cancel Icon -->
+        <div class="mb-4">
+          <div class="display-4 text-danger">❌</div>
+          <h2 class="text-danger mt-3">Payment Cancelled</h2>
+        </div>
+
+        <!-- Message -->
+        <p class="lead">
+          Your payment was not completed.
+        </p>
+
+        <p class="text-muted">
+          Your selected seats remain reserved for 5 minutes.
+          Please complete the payment before the reservation expires,
+          or the seats will automatically be released.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="mt-4 d-flex justify-content-center flex-wrap gap-2">
+
+          <a href="{% url 'book_seats' request.resolver_match.kwargs.theater_id %}"
+             class="btn btn-warning px-4">
+            Retry Payment
+          </a>
+
+          <a href="{% url 'movie_list' %}"
+             class="btn btn-outline-secondary px-4">
+            Back to Movies
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

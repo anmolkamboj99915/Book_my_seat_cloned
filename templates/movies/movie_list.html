@@ -1,0 +1,130 @@
+{% extends "users/basic.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <h1 class="text-center mb-4">Movies</h1>
+
+    <!-- SEARCH + FILTER FORM -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-10">
+            <form method="GET" action="{% url 'movie_list' %}" class="p-3 shadow-sm bg-light rounded">
+
+                <div class="row">
+
+                    <!-- Search -->
+                    <div class="col-md-4 mb-2">
+                        <input
+                            class="form-control"
+                            name="search"
+                            placeholder="Search movies..."
+                            type="text"
+                            value="{{ request.GET.search|default:'' }}"
+                        />
+                    </div>
+
+                    <!-- Genre Filter -->
+                    <div class="col-md-3 mb-2">
+                        <select name="genre" class="form-control">
+                            <option value="">All Genres</option>
+                            {% for key, value in movies.model.GENRE_CHOICES %}
+                                <option value="{{ key }}"
+                                    {% if request.GET.genre == key %}selected{% endif %}>
+                                    {{ value }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Language Filter -->
+                    <div class="col-md-3 mb-2">
+                        <select name="language" class="form-control">
+                            <option value="">All Languages</option>
+                            {% for key, value in movies.model.LANGUAGE_CHOICES %}
+                                <option value="{{ key }}"
+                                    {% if request.GET.language == key %}selected{% endif %}>
+                                    {{ value }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="col-md-2 mb-2">
+                        <button class="btn btn-primary btn-block" type="submit">
+                            Apply
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- MOVIE CARDS -->
+    <div class="row">
+        {% for movie in movies %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+
+                <img src="{{ movie.image.url }}"
+                     class="card-img-top"
+                     alt="{{ movie.name }}"
+                     style="height: 300px; object-fit: cover;">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">{{ movie.name }}</h5>
+
+                    <p class="card-text">
+                        ⭐ {{ movie.rating }}
+                    </p>
+
+                    {% if movie.genre or movie.language %}
+                    <p class="card-text">
+                        <small class="text-muted">
+                            {% if movie.genre %}🎭 {{ movie.genre }}{% endif %}
+                            {% if movie.genre and movie.language %} | {% endif %}
+                            {% if movie.language %}🌐 {{ movie.language }}{% endif %}
+                        </small>
+                    </p>
+                    {% endif %}
+
+                    <p class="card-text">
+                        <small class="text-muted">
+                            👥 Cast: {{ movie.cast }}
+                        </small>
+                    </p>
+
+                </div>
+
+                <div class="card-footer bg-white border-top-0">
+                    <a href="{% url 'theater_list' movie.id %}"
+                       class="btn btn-outline-primary btn-block">
+                        View Theaters
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="col-12 text-center">
+            <p class="lead">No movies found matching your filters.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<style>
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+</style>
+
+{% endblock %}

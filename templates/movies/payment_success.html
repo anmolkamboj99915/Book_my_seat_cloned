@@ -1,0 +1,47 @@
+{% extends "users/basic.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 col-lg-6 mx-auto">
+
+      <div class="card shadow text-center p-5">
+
+        <!-- Success Icon -->
+        <div class="mb-4">
+          <div class="display-4 text-success">✅</div>
+          <h2 class="text-success mt-3">Payment Successful!</h2>
+        </div>
+
+        <!-- Confirmation Message -->
+        <p class="lead">
+          Your tickets have been successfully booked.
+        </p>
+
+        <p class="text-muted">
+          You can view your booking details in your profile.
+          {% if user.email %}
+          A confirmation email has been sent to your registered email address.
+          {% endif %}
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="mt-4 d-flex justify-content-center flex-wrap gap-2">
+
+          <a href="{% url 'movie_list' %}" class="btn btn-primary px-4">
+            Browse More Movies
+          </a>
+
+          <a href="{% url 'profile' %}" class="btn btn-outline-success px-4">
+            View My Bookings
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

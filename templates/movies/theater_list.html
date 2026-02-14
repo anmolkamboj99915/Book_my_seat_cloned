@@ -1,0 +1,85 @@
+{% extends "users/basic.html" %}
+{% block content %}
+
+<div class="container py-5">
+
+  <!-- ========================= -->
+  <!-- MOVIE HEADER -->
+  <!-- ========================= -->
+  <div class="text-center mb-4">
+    <h2 class="fw-bold">{{ movie.name }}</h2>
+
+    <p class="text-muted">
+      {% if movie.genre %}🎭 {{ movie.genre }}{% endif %}
+      {% if movie.genre and movie.language %} | {% endif %}
+      {% if movie.language %}🌐 {{ movie.language }}{% endif %}
+      {% if movie.rating %} | ⭐ {{ movie.rating }}{% endif %}
+    </p>
+  </div>
+
+  <!-- ========================= -->
+  <!-- TRAILER -->
+  <!-- ========================= -->
+  {% if movie.trailer_url %}
+  <div class="text-center mb-5">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
+      <iframe
+        src="{{ movie.trailer_url }}"
+        style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ========================= -->
+  <!-- THEATER LIST -->
+  <!-- ========================= -->
+  {% if theaters %}
+    {% for theater in theaters %}
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body d-flex justify-content-between align-items-center flex-wrap">
+
+        <!-- Theater Info -->
+        <div>
+          <h5 class="mb-1">{{ theater.name }} Theater</h5>
+
+          <div class="small text-muted mb-2">
+            🎟 M-Ticket |
+            🍿 Food & Beverage |
+            🚗 Parking |
+            ♿ Wheelchair |
+            🎬 3D Available
+          </div>
+        </div>
+
+        <!-- Time + Book -->
+        <div class="text-center mt-3 mt-md-0">
+          <div class="fw-semibold mb-2">
+            {{ theater.time|date:"D, d M Y - h:i A" }}
+          </div>
+          <a href="{% url 'book_seats' theater.id %}"
+             class="btn btn-success px-4">
+            Book Now
+          </a>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-warning text-center">
+      Sorry, no theaters are available for this movie at the moment.
+    </div>
+  {% endif %}
+
+  <!-- ========================= -->
+  <!-- FOOTER NOTE -->
+  <!-- ========================= -->
+  <div class="text-center mt-4 text-warning fw-semibold">
+    ⚠ Non-cancellable
+  </div>
+
+</div>
+
+{% endblock %}

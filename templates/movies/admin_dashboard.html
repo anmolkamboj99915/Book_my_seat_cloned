@@ -1,0 +1,82 @@
+{% extends "users/basic.html" %}
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-5">📊 Admin Analytics Dashboard</h2>
+
+    <!-- TOTAL REVENUE -->
+    <div class="row mb-5">
+        <div class="col-md-4 mx-auto">
+            <div class="card text-center shadow">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Revenue</h6>
+                    <h2 class="text-success">
+                        ${{ total_revenue|floatformat:2|default:"0.00" }}
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- POPULAR MOVIES -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-primary text-white">
+                    🎬 Most Popular Movies
+                </div>
+                <div class="card-body">
+
+                    {% if popular_movies %}
+                        <ul class="list-group list-group-flush">
+                            {% for movie in popular_movies %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ movie.movie__name }}
+                                <span class="badge badge-success">
+                                    {{ movie.total }}
+                                </span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted mb-0">No booking data available.</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <!-- BUSIEST THEATERS -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-dark text-white">
+                    🏢 Busiest Theaters
+                </div>
+                <div class="card-body">
+
+                    {% if busiest_theaters %}
+                        <ul class="list-group list-group-flush">
+                            {% for theater in busiest_theaters %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ theater.theater__name }}
+                                <span class="badge badge-warning">
+                                    {{ theater.total }}
+                                </span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted mb-0">No booking data available.</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

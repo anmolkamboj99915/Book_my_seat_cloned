@@ -1,0 +1,7 @@
+[project]
+name = "project_100_angela"
+version = "1.0.0"
+description = "Auto-generated dependency file"
+requires-python = ">=3.10"
+dependencies = [
+]

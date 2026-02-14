@@ -1,0 +1,9 @@
+tell which files codes i chould need to share i will share line wise and make sure you take a good look and proceed with precaution and deep thinking while modifying scripts and make sure no script looses its original functionality a bit while improving 
+
+PROJECT 1- 
+        tasks i have to achieve - Add Movie Trailers - Embed YouTube trailers for movies on their detail pages.
+        - Implement Seat Reservation Timeout - Reserve selected seats for a user temporarily (e.g., 5 minutes) until payment is made. Automatically release them after the timeout.
+        - Payment Gateway Integration - Integrate a payment gateway (Stripe or Razorpay) for ticket purchases with success/failure handling.
+        - Admin Dashboard with Analytics- Build a dashboard for admins showing metrics like total revenue, most popular movies, and busiest theaters (Share Admin Credentials)
+        - Genre and Language Filters - Allow users to filter movies by genre (e.g., Action, Comedy) and language (e.g., Hindi, English).
+        - Ticket Email Confirmation- Send an email confirmation with booking details to the user after a successful booking.
