@@ -4,12 +4,10 @@
     {
       "src": "bookmyseat/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
-    },
-    {
-      "src": "build.sh",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "staticfiles" }
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.12"
+      }
     }
   ],
   "routes": [
