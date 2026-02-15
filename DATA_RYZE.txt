@@ -161,6 +161,8 @@ VERCEL SETUP:
     $env:DATABASE_URL = (Get-Content .env.production | Select-String DATABASE_URL).ToString().Split("=")[1]
     python manage.py migrate
 
+    BUILD COMAND ON VERCEL TO PLACE - python manage.py collectstatic --noinput
+
 
 
 
