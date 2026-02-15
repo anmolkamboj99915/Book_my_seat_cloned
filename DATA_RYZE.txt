@@ -163,6 +163,8 @@ running ways -
     python manage.py runserver
 
 root level full synch 
+            python manage.py migrate
+            python manage.py makemigrations
             git add -A
             git commit -m "Full project sync"
             git push origin main
