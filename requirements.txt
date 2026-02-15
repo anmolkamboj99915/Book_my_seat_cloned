@@ -3,6 +3,6 @@ whitenoise
 dj-database-url
 python-dotenv
 stripe
-psycopg[binary]
+psycopg-binary
 Pillow
 gunicorn
