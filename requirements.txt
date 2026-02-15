@@ -1,4 +1,4 @@
-Django>=5.0
+Django==5.1.1
 whitenoise
 dj-database-url
 python-dotenv
