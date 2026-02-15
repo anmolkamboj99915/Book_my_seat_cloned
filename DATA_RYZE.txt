@@ -160,6 +160,10 @@ running ways -
     python manage.py makemigrations
     python manage.py runserver
 
+root level full synch 
+            git add -A
+            git commit -m "Full project sync"
+            git push origin main
 
 to create admin - python manage.py createsuperuser
     username admin - Anmoljaiya
