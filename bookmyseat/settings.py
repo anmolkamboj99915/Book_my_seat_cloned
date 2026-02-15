@@ -105,14 +105,13 @@ if DATABASE_URL:
         )
     }
 else:
-    # Fallback for build time (Vercel collectstatic)
+    # Required for Vercel build phase (collectstatic)
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-
 
 # ==================================================
 # PASSWORD VALIDATION
