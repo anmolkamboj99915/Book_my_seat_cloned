@@ -21,18 +21,18 @@ TIMESTAMPED_FILE = os.path.join(LOG_DIR, f"project_structure_{timestamp}.txt")
 # === Exclusions & Force Includes ===
 EXCLUDED_DIRS: Set[str] = {
     ".git", ".vscode",
-    "__pycache__", ".pytest_cache", "logs", "scripts", "node_modules", ".venv",
+    "__pycache__", ".pytest_cache", "logs", "node_modules", ".venv",
 }
 
 IGNORED_SUFFIXES: Set[str] = {
-    ".txt", ".db", ".wav", ".json"
+    ".db", ".wav"
 }
 
 FORCE_INCLUDE_FILES: Set[str] = {"main.py", "config.py"}
 FORCE_INCLUDE_DIRS: Set[str] = {"modules"}
 
 INCLUDE_CONTENT_SUFFIXES: Set[str] = {
-    ".py", ".html", ".css", ".js", ".jsx", ".config.js", ".ts", ".tsx"
+    ".py", ".html", ".css", ".js", ".jsx", ".config.js", ".ts", ".tsx", ".txt", ".md"
 }
 
 # === Tracking ===
