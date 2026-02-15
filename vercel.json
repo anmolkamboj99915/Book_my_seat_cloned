@@ -1,11 +1,10 @@
 {
-  "builds": [
-    {
-      "src": "bookmyseat/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "runtime": "python3.12" }
+  "version": 2,
+  "functions": {
+    "bookmyseat/wsgi.py": {
+      "runtime": "python3.12"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(.*)",
