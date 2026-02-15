@@ -156,8 +156,10 @@ Comand to create django secret key - python -c "from django.core.management.util
 
 
 running ways - 
+    python manage.py collectstatic
     python manage.py migrate
     python manage.py makemigrations
+
     python manage.py runserver
 
 root level full synch 
