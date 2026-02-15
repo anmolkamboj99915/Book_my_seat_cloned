@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "manage.py",
+      "src": "bookmyseat/wsgi.py",
       "use": "@vercel/python",
       "config": { "runtime": "python3.12" }
     }
@@ -9,7 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "manage.py"
+      "dest": "bookmyseat/wsgi.py"
     }
   ]
 }
