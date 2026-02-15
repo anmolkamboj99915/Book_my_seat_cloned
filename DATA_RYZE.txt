@@ -163,6 +163,11 @@ running ways -
     python manage.py runserver
 
 root level full synch 
+    TO CHECK ISSUES
+        python manage.py check
+
+
+
             python manage.py collectstatic
             python manage.py migrate
             python manage.py makemigrations
